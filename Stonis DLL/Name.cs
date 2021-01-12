@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace NameGen
+namespace Stonis
 {
     /// <summary>
     /// A randomly-generated name from the initialized syllables.

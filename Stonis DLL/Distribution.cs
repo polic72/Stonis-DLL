@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace NameGen
+namespace Stonis
 {
     /// <summary>
     /// A utility class that customizes a discrete distribution.
