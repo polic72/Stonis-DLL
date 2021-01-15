@@ -89,6 +89,8 @@ namespace Stonis
         }
 
 
+        #region NextGaussian
+
         /// <summary>
         /// Gets a random number based on the normal distribution with the given mean and standard deviation.
         /// </summary>
@@ -116,6 +118,100 @@ namespace Stonis
         {
             return NextGaussian(random, 0, 1);
         }
+
+        #endregion NextGaussian
+
+
+        #region NextVector
+
+        /// <summary>
+        /// Gets a random vector between the given lengths [min, max).
+        /// </summary>
+        /// <param name="random">The Random object to use.</param>
+        /// <param name="min">The minumum length. (Inclusive)</param>
+        /// <param name="max">The maximum length. (Exclusive)</param>
+        /// <returns>The random vector.</returns>
+        public static XYZ NextVector(this Random random, double min, double max)
+        {
+            double x = random.NextDouble();
+            double y = random.NextDouble();
+            double z = random.NextDouble();
+
+            XYZ vector = new XYZ(x, y, z).Normalize();
+
+            double multiplier = random.NextDouble() * (max - min) + min;
+
+            return vector * multiplier;
+        }
+
+
+        /// <summary>
+        /// Gets a random vector between 0 and the given length [0, max).
+        /// </summary>
+        /// <param name="random">The Random object to use.</param>
+        /// <param name="max">The maximum length. (Exclusive)</param>
+        /// <returns>The random vector.</returns>
+        public static XYZ NextVector(this Random random, double max)
+        {
+            return NextVector(random, 0, max);
+        }
+
+
+        /// <summary>
+        /// Gets a random vector between 0 and 1 [0, 1).
+        /// </summary>
+        /// <param name="random">The Random object to use.</param>
+        /// <returns>The random vector.</returns>
+        public static XYZ NextVector(this Random random)
+        {
+            return NextVector(random, 0, 1);
+        }
+
+        #endregion NextVector
+
+
+        #region NextCoordinate
+
+        /// <summary>
+        /// Gets a random coordinate with each axis between the given limits [min, max).
+        /// </summary>
+        /// <param name="random">The Random object to use.</param>
+        /// <param name="min">The minimum value an axis can be.</param>
+        /// <param name="max">The maximum value an axis can be.</param>
+        /// <returns>The random coordinate.</returns>
+        public static XYZ NextCoordinate(this Random random, double min, double max)
+        {
+            double x = random.NextDouble() * (max - min) + min;
+            double y = random.NextDouble() * (max - min) + min;
+            double z = random.NextDouble() * (max - min) + min;
+
+            return new XYZ(x, y, z);
+        }
+
+
+        /// <summary>
+        /// Gets a random coordinate with each axis between 0 and the given limit [0, max).
+        /// </summary>
+        /// <param name="random">The Random object to use.</param>
+        /// <param name="max">The maximum value an axis can be.</param>
+        /// <returns>The random coordinate.</returns>
+        public static XYZ NextCoordinate(this Random random, double max)
+        {
+            return NextCoordinate(random, 0, max);
+        }
+
+
+        /// <summary>
+        /// Gets a random coordinate with each axis between double.MinValue and double.MaxValue.
+        /// </summary>
+        /// <param name="random">The Random object to use.</param>
+        /// <returns>The random coordinate.</returns>
+        public static XYZ NextCoordinate(this Random random)
+        {
+            return NextCoordinate(random, double.MinValue, double.MaxValue);
+        }
+
+        #endregion NextCoordinate
 
         #endregion Random Extension Methods
 
