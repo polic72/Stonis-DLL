@@ -148,8 +148,17 @@ namespace Stonis
         }
 
 
+        /// <summary>
+        /// Converts a name to a string implicitly.
+        /// </summary>
+        /// <param name="name">The name to convert.</param>
         public static explicit operator string(Name name) => name.ToString();
 
+
+        /// <summary>
+        /// Gets the string that describes this name.
+        /// </summary>
+        /// <returns>The string that describes this name.</returns>
         public override string ToString()
         {
             return string.Join("", syllables);

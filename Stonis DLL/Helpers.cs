@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Stonis
 {
+    /// <summary>
+    /// A class of miscellaneous helpers.
+    /// </summary>
     public static class Helpers
     {
         #region Random Extension Methods
@@ -61,7 +64,6 @@ namespace Stonis
         /// Gets a random long number between long.MinValue (inclusive) and long.MaxValue (exclusive).
         /// </summary>
         /// <param name="random">The random object to use.</param>
-        /// <param name="max">The maximum bound, exclusive.</param>
         /// <returns>The generated long.</returns>
         public static long NextLong(this Random random)
         {
@@ -84,6 +86,35 @@ namespace Stonis
         public static T NextDistributed<T>(this Random random, T[] possible_values, double[] probabilities)
         {
             return new Distribution<T>(possible_values, probabilities, random).ChooseValue();
+        }
+
+
+        /// <summary>
+        /// Gets a random number based on the normal distribution with the given mean and standard deviation.
+        /// </summary>
+        /// <param name="random">The Random object to use.</param>
+        /// <param name="mean">The mean of the normal distribution. (Where the curve is centered.)</param>
+        /// <param name="std_deviation">The standard deviation of the normal distribution. (The width of the curve.)</param>
+        /// <returns>A double on the normal distribution.</returns>
+        public static double NextGaussian(this Random random, double mean, double std_deviation)
+        {
+            double uniform_1 = 1.0 - random.NextDouble();
+            double uniform_2 = 1.0 - random.NextDouble();
+
+            double randStdNormal = Math.Sqrt(-2.0 * Math.Log(uniform_1)) * Math.Sin(2.0 * Math.PI * uniform_2);
+
+            return mean + std_deviation * randStdNormal;
+        }
+
+
+        /// <summary>
+        /// Gets a random number based on the normal distribution with a mean of 0 and standard deviation of 1.
+        /// </summary>
+        /// <param name="random">The Random object to use.</param>
+        /// <returns>A double on the normal distribution.</returns>
+        public static double NextGaussian(this Random random)
+        {
+            return NextGaussian(random, 0, 1);
         }
 
         #endregion Random Extension Methods
