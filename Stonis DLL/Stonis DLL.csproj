@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScoredDistribution.cs" />
     <Compile Include="Distribution.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Name.cs" />
