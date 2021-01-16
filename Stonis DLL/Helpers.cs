@@ -133,9 +133,9 @@ namespace Stonis
         /// <returns>The random vector.</returns>
         public static XYZ NextVector(this Random random, double min, double max)
         {
-            double x = random.NextDouble();
-            double y = random.NextDouble();
-            double z = random.NextDouble();
+            double x = random.NextDouble() * 2 - 1;
+            double y = random.NextDouble() * 2 - 1;
+            double z = random.NextDouble() * 2 - 1;
 
             XYZ vector = new XYZ(x, y, z).Normalize();
 
